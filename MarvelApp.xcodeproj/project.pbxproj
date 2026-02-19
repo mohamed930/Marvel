@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D3CD47C92F472872005435F0 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = D3CD47C82F472872005435F0 /* Reachability */; };
+		D3CD47CC2F472908005435F0 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D3CD47CB2F472908005435F0 /* Alamofire */; };
+		D3CD47CF2F472AA6005435F0 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = D3CD47CE2F472AA6005435F0 /* SkeletonView */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		D3F6B6412F4726D60022A67A /* MarvelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -14,7 +20,7 @@
 		D3F6B6532F4726D70022A67A /* Exceptions for "MarvelApp" folder in "MarvelApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Assets/Info.plist,
 			);
 			target = D3F6B6402F4726D60022A67A /* MarvelApp */;
 		};
@@ -36,6 +42,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3CD47C92F472872005435F0 /* Reachability in Frameworks */,
+				D3CD47CF2F472AA6005435F0 /* SkeletonView in Frameworks */,
+				D3CD47CC2F472908005435F0 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +87,9 @@
 			);
 			name = MarvelApp;
 			packageProductDependencies = (
+				D3CD47C82F472872005435F0 /* Reachability */,
+				D3CD47CB2F472908005435F0 /* Alamofire */,
+				D3CD47CE2F472AA6005435F0 /* SkeletonView */,
 			);
 			productName = MarvelApp;
 			productReference = D3F6B6412F4726D60022A67A /* MarvelApp.app */;
@@ -107,6 +119,11 @@
 			);
 			mainGroup = D3F6B6382F4726D60022A67A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D3CD47C72F472872005435F0 /* XCRemoteSwiftPackageReference "Reachability.swift" */,
+				D3CD47CA2F472908005435F0 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				D3CD47CD2F472AA6005435F0 /* XCRemoteSwiftPackageReference "SkeletonView" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D3F6B6422F4726D60022A67A /* Products */;
 			projectDirPath = "";
@@ -147,10 +164,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X4YZSY77G5;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MarvelApp/Info.plist;
+				INFOPLIST_FILE = MarvelApp/Assets/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -175,10 +191,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X4YZSY77G5;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MarvelApp/Info.plist;
+				INFOPLIST_FILE = MarvelApp/Assets/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -335,6 +350,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D3CD47C72F472872005435F0 /* XCRemoteSwiftPackageReference "Reachability.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		D3CD47CA2F472908005435F0 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.11.1;
+			};
+		};
+		D3CD47CD2F472AA6005435F0 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.31.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D3CD47C82F472872005435F0 /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D3CD47C72F472872005435F0 /* XCRemoteSwiftPackageReference "Reachability.swift" */;
+			productName = Reachability;
+		};
+		D3CD47CB2F472908005435F0 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D3CD47CA2F472908005435F0 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		D3CD47CE2F472AA6005435F0 /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D3CD47CD2F472AA6005435F0 /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D3F6B6392F4726D60022A67A /* Project object */;
 }
