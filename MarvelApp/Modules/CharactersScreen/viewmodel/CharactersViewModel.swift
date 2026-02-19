@@ -1,0 +1,52 @@
+//
+//  CharactersViewModel.swift
+//  MarvelApp
+//
+//  Created by Mohamed Ali on 19/02/2026.
+//
+
+import Foundation
+import Combine
+
+class CharactersViewModel {
+    var coordinator: CharactersCoordinator?
+    
+    private var charactersPublisher = CurrentValueSubject<[CharacterEntity], Never>([])
+    var charactersObservable: AnyPublisher<[CharacterEntity],Never> {
+        return charactersPublisher.eraseToAnyPublisher()
+    }
+    var characters: [CharacterEntity] {
+        charactersPublisher.value
+    }
+    var errorMessagePublisher = PassthroughSubject<String?,Never>()
+    
+    private let getCharactersUseCase: GetCharactersUseCaseProtocol
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(getCharactersUseCase: GetCharactersUseCaseProtocol = GetCharactersUseCase(repository: CharactersRepository())) {
+        self.getCharactersUseCase = getCharactersUseCase
+    }
+    
+    func moveToCharacterDetails(index: Int) {
+        
+    }
+    
+    func fetchCharacters() {
+        getCharactersUseCase.execute(limit: 20, offset: 0)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                guard let self = self else { return }
+                
+                switch completion {
+                case .finished: break
+                case .failure(let error):
+                    self.errorMessagePublisher.send(error.localizedDescription)
+                }
+            } receiveValue: { [weak self] characters in
+                guard let self = self else { return }
+                
+                self.charactersPublisher.send(characters)
+            }
+            .store(in: &cancellables)
+    }
+}

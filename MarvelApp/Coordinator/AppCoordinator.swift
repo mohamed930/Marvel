@@ -25,7 +25,9 @@ final class AppCoordinator: BaseCoordinator {
     override func start() {
         let navigationController = UINavigationController()
         
-        
+        let coordinator = CharactersCoordinator(navigationController: navigationController)
+        add(coordinator: coordinator)
+        coordinator.start()
         
         guard let window = window else {
             return
