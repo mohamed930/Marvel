@@ -21,7 +21,7 @@ enum Task {
     case requestParameters(parameters : [String:Any] , encoding: ParameterEncoding)
 }
 
-protocol TargetType: AppLanguageStore {
+protocol TargetType {
     var baseURL: Api { get }
     var path: Api { get }
     var method: HTTPMethod { get }

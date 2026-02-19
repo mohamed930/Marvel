@@ -20,9 +20,4 @@ class BaseCoordinator: Coordinator {
     func removeFromParant() {
         parantCoordinator?.remove(coordinator: self)
     }
-    
-    
-    func declareViewController<T: UIViewController>(screen: screens) -> T? {
-        return T(nibName: screen.rawValue, bundle: nil)
-    }
 }

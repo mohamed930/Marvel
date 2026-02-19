@@ -7,15 +7,23 @@
 
 import Foundation
 
+// MARK: - BaseModel
 struct BaseModel<T: Codable>: Codable {
-    var data: T?
-    let result: String
     let code: Int
-    let timestamp: String
-    let message: String?
-    let totalPages: Int?
+    let status: String
+    let copyright: String?
+    let attributionText: String?
+    let attributionHTML: String?
+    let etag: String?
+    let data: DataContainer<T>
 }
 
-struct TokenModel: Codable {
-    let token: String
+// MARK: - DataContainer
+struct DataContainer<T: Codable>: Codable {
+    let offset: Int
+    let limit: Int
+    let total: Int
+    let count: Int
+    let results: T
 }
+
