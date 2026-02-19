@@ -8,10 +8,6 @@
 import Foundation
 import Combine
 
-// currentUrl: https://dafterq.lnj.sa/
-// Quality: https://dafterq.lnj.sa/
-// Production: https://dafterp.lnj.sa/
-
 struct errorMessage {
     let type: errorStatus
     let message: String
@@ -36,9 +32,9 @@ extension Api {
     var rawValue: String {
         switch self {
         case .baseUrl:
-            return "https://morizon.sherifshalaby.tech/api/v1/"
+            return "https://gateway.marvel.com"
         case .fetchCharacters:
-            return "https://geocode-api.arcgis.com/arcgis/rest/services/World/"
+            return "/v1/public/characters"
         }
     }
 }
