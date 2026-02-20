@@ -23,6 +23,8 @@ class CharactersCoordinator: BaseCoordinator {
     }
     
     func moveToCharacterDetails() {
-        
+        let coordinator = CharacterDetailsCoordinator(navigationController: navigationController)
+        add(coordinator: coordinator)
+        coordinator.start()
     }
 }

@@ -32,7 +32,7 @@ class CharactersViewModel {
     }
     
     func moveToCharacterDetails(index: Int) {
-        
+        coordinator?.moveToCharacterDetails()
     }
     
     func fetchCharacters() {
