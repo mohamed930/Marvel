@@ -35,6 +35,7 @@ class CharactersViewController: UIViewController {
         
         subscribeToCharacterPublisher()
         subscribeToErrorPublisher()
+        subscribeToPagaignLoadingBehaviour()
         
         fetchCharacters()
     }
@@ -66,6 +67,16 @@ class CharactersViewController: UIViewController {
         }).store(in: &cancellables)
     }
     
+    func subscribeToPagaignLoadingBehaviour() {
+        viewmodel.pagaignLoadingBehaviour.sink(receiveValue: { [weak self] isloading in
+            guard let self = self else { return }
+            
+            loadingMoreView.isHidden = !isloading
+            isloading ? loadingIndecator.startAnimating() : loadingIndecator.stopAnimating()
+            
+        }).store(in: &cancellables)
+    }
+    
     func fetchCharacters() {
         viewmodel.fetchCharacters()
     }
@@ -88,5 +99,21 @@ extension CharactersViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewmodel.moveToCharacterDetails(index: indexPath.row)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard !viewmodel.pagaignLoadingBehaviour.value else { return }
+
+        guard let tableView = scrollView as? UITableView else { return }
+
+        let visibleRows = tableView.indexPathsForVisibleRows ?? []
+        guard let lastVisible = visibleRows.max() else { return }
+
+        let totalRows = viewmodel.characters.count // مهم
+
+        // Trigger قبل النهاية بـ 3 عناصر (أفضل UX)
+        if lastVisible.row >= totalRows - 3 {
+            viewmodel.fetchNextPageOperation()
+        }
     }
 }

@@ -10,6 +10,8 @@ import Combine
 
 class CharactersViewModel {
     var coordinator: CharactersCoordinator?
+    private let pageLimit = 20
+    private var hasMorePages = true
     
     private var charactersPublisher = CurrentValueSubject<[CharacterEntity], Never>([])
     var charactersObservable: AnyPublisher<[CharacterEntity],Never> {
@@ -19,6 +21,8 @@ class CharactersViewModel {
         charactersPublisher.value
     }
     var errorMessagePublisher = PassthroughSubject<String?,Never>()
+    
+    var pagaignLoadingBehaviour = CurrentValueSubject<Bool,Never>(false)
     
     private let getCharactersUseCase: GetCharactersUseCaseProtocol
     private var cancellables = Set<AnyCancellable>()
@@ -32,7 +36,7 @@ class CharactersViewModel {
     }
     
     func fetchCharacters() {
-        getCharactersUseCase.execute(limit: 20, offset: 0)
+        getCharactersUseCase.execute(limit: pageLimit, offset: 0)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 guard let self = self else { return }
@@ -46,6 +50,38 @@ class CharactersViewModel {
                 guard let self = self else { return }
                 
                 self.charactersPublisher.send(characters)
+                self.hasMorePages = characters.count == self.pageLimit
+            }
+            .store(in: &cancellables)
+    }
+    
+    func fetchNextPageOperation() {
+        guard hasMorePages else { return }
+        
+        pagaignLoadingBehaviour.send(true)
+        let nextOffset = characters.count
+        
+        getCharactersUseCase.execute(limit: pageLimit, offset: nextOffset)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                guard let self = self else { return }
+                self.pagaignLoadingBehaviour.send(false)
+                
+                switch completion {
+                case .finished: break
+                case .failure(let error):
+                    self.errorMessagePublisher.send(error.localizedDescription)
+                }
+            } receiveValue: { [weak self] nextPageCharacters in
+                guard let self = self else { return }
+                
+                guard !nextPageCharacters.isEmpty else {
+                    self.hasMorePages = false
+                    return
+                }
+                
+                self.charactersPublisher.send(self.characters + nextPageCharacters)
+                self.hasMorePages = nextPageCharacters.count == self.pageLimit
             }
             .store(in: &cancellables)
     }

@@ -32,7 +32,7 @@
                         <constraint firstAttribute="width" secondItem="3c8-ly-ubp" secondAttribute="height" multiplier="60:33" id="Fxa-HZ-veJ"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trending Today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ijv-xT-NJu">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Characters Trending" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ijv-xT-NJu">
                     <rect key="frame" x="12" y="158" width="369" height="29.333333333333343"/>
                     <fontDescription key="fontDescription" name="Inter-Bold" family="Inter" pointSize="24"/>
                     <nil key="textColor"/>
