@@ -11,7 +11,7 @@ import Combine
 
 extension UIImageView {
     
-    func loadImageFromServer(_ url: String, placeHolderName: UIImage = UIImage(named: "loading")!) {
+    func loadImageFromServer(_ url: String, placeHolderName: UIImage? = nil) {
         
         let newUrl = url.trimmingCharacters(in: .whitespaces)
         
@@ -21,8 +21,7 @@ extension UIImageView {
         }
         
         // Use SDWebImage to load and cache the image
-        let placeHolderImage = placeHolderName
-        self.sd_setImage(with: url, placeholderImage: placeHolderImage, options: [.refreshCached, .continueInBackground,.transformAnimatedImage]) { [weak self] (image, error, cacheType, imageURL) in
+        self.sd_setImage(with: url, placeholderImage: nil, options: [.refreshCached, .continueInBackground,.transformAnimatedImage]) { [weak self] (image, error, cacheType, imageURL) in
             guard let self = self else { return }
             
             // Handle completion if needed

@@ -16,22 +16,27 @@ class CharactersCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        // Avoid showing XIB placeholder text before binding real data.
+        characterTitleLabel.text = nil
+        characterDescribtionLabel.text = nil
+        characterImageView.image = nil
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
         
-        showSkeleton()
+        characterTitleLabel.text = nil
+        characterDescribtionLabel.text = nil
+        characterImageView.image = nil
     }
     
     func configureCell(_ model: CharacterEntity) {
+        hideSkeleton()
+        
         characterTitleLabel.text       = model.name
         characterDescribtionLabel.text = model.description
         
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            
-            characterImageView.loadImageFromServer(model.thumbnailURL)
-            
-            hideSkeleton()
-        }
+        characterImageView.loadImageFromServer(model.thumbnailURL)
     }
     
     func showSkeleton() {

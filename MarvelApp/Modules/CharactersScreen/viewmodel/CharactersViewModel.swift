@@ -12,6 +12,7 @@ class CharactersViewModel {
     var coordinator: CharactersCoordinator?
     private let pageLimit = 20
     private var hasMorePages = true
+    private static let repositoryMode: CharactersRepositoryMode = .mock
     
     private var charactersPublisher = CurrentValueSubject<[CharacterEntity], Never>([])
     var charactersObservable: AnyPublisher<[CharacterEntity],Never> {
@@ -27,7 +28,11 @@ class CharactersViewModel {
     private let getCharactersUseCase: GetCharactersUseCaseProtocol
     private var cancellables = Set<AnyCancellable>()
     
-    init(getCharactersUseCase: GetCharactersUseCaseProtocol = GetCharactersUseCase(repository: CharactersRepository())) {
+    init(
+        getCharactersUseCase: GetCharactersUseCaseProtocol = GetCharactersUseCase(
+            repository: CharactersRepository(mode: CharactersViewModel.repositoryMode)
+        )
+    ) {
         self.getCharactersUseCase = getCharactersUseCase
     }
     
