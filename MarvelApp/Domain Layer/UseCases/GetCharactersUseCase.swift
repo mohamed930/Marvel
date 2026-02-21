@@ -10,6 +10,7 @@ import Combine
 
 protocol GetCharactersUseCaseProtocol {
     func execute(limit: Int, offset: Int) -> AnyPublisher<[CharacterEntity], NSError>
+    func executeResult(at index: Int) -> ResultModel
 }
 
 final class GetCharactersUseCase: GetCharactersUseCaseProtocol {
@@ -22,5 +23,9 @@ final class GetCharactersUseCase: GetCharactersUseCaseProtocol {
     func execute(limit: Int = 20, offset: Int = 0) -> AnyPublisher<[CharacterEntity], NSError> {
         repository.fetchCharacters(limit: limit, offset: offset)
             .eraseToAnyPublisher()
+    }
+
+    func executeResult(at index: Int) -> ResultModel {
+        repository.fetchCharacterResult(at: index)
     }
 }

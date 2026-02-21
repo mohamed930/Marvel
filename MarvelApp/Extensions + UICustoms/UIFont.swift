@@ -8,11 +8,12 @@
 import SwiftUI
 
 enum Fonts: String {
-    case mainFont = "Quicksand-Regular"
-    case mainFontMeduim = "Quicksand-Medium"
-    case mainFontBold = "Quicksand-Bold"
-    case mainFontLight = "Quicksand-Light"
-    case mainFontSemiBold = "Quicksand-SemiBold"
+    case mainFont = "Inter-Regular"
+    case mainFontMeduim = "Inter-Medium"
+    case mainFontBold = "Inter-Bold"
+    case mainFontLight = "Inter-Light"
+    case mainFontSemiBold = "Inter-SemiBold"
+    case mainFontExtraBold = "Inter-ExtraBold"
 }
 
 struct CustomFontModifier: ViewModifier {

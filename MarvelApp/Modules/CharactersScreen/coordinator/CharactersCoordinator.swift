@@ -22,7 +22,9 @@ class CharactersCoordinator: BaseCoordinator {
         navigationController.setViewControllers([viewController], animated: true)
     }
     
-    func moveToCharacterDetails() {
-        
+    func moveToCharacterDetails(characterDetails: ResultModel) {
+        let coordinator = CharacterDetailsCoordinator(navigationController: navigationController, characterModel: characterDetails)
+        add(coordinator: coordinator)
+        coordinator.start()
     }
 }
