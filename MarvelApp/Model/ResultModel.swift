@@ -96,6 +96,17 @@ extension ResultModel {
         events: .empty,
         urls: [.mock]
     )
+
+    static let mockResult: [ResultModel] = (1...50).map { index in
+        switch (index - 1) % 3 {
+        case 0:
+            return .mock
+        case 1:
+            return .mockNoDescription
+        default:
+            return .mockEmptySections
+        }
+    }
 }
 
 extension Thumbnail {
