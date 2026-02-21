@@ -10,4 +10,5 @@ import Combine
 
 protocol CharactersRepositoryProtocol {
     func fetchCharacters(limit: Int, offset: Int) -> AnyPublisher<[CharacterEntity], NSError>
+    func fetchCharacterResult(at index: Int) -> ResultModel
 }

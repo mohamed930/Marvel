@@ -32,7 +32,8 @@ class CharactersViewModel {
     }
     
     func moveToCharacterDetails(index: Int) {
-        coordinator?.moveToCharacterDetails()
+        let model = getCharactersUseCase.executeResult(at: index)
+        coordinator?.moveToCharacterDetails(characterDetails: model)
     }
     
     func fetchCharacters() {

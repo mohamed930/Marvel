@@ -30,24 +30,29 @@ struct CharacterDetailsView: View {
                 VStack {
                     
                     ZStack {
-                        Image(.card3)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(maxWidth: .infinity, minHeight: 560, maxHeight: 560)
-                            .clipped()
-                            .overlay(
-                                LinearGradient(
-                                    gradient: Gradient(stops: [
-                                        .init(color: .black.opacity(0), location: 0),
-                                        .init(color: .black.opacity(1), location: 1)
-                                    ]),
-                                    startPoint: .top,
-                                    endPoint: .bottom
+                        
+                        CustomAsyncImage(img: viewmodel.characterModel.thumbnail.path) { img in
+                            img
+                                .resizable()
+                                .scaledToFill()
+                                .frame(maxWidth: .infinity, minHeight: 560, maxHeight: 560)
+                                .clipped()
+                                .overlay(
+                                    LinearGradient(
+                                        gradient: Gradient(stops: [
+                                            .init(color: .black.opacity(0), location: 0),
+                                            .init(color: .black.opacity(1), location: 1)
+                                        ]),
+                                        startPoint: .top,
+                                        endPoint: .bottom
+                                    )
                                 )
-                            )
+                            
+                        }
+                            
                         
                         VStack {
-                            Text("Wanda Vision")
+                            Text(viewmodel.characterModel.name)
                                 .setFont(fontName: .mainFontExtraBold, size: 20)
                                 .padding(.top, 30)
                             
@@ -65,22 +70,35 @@ struct CharacterDetailsView: View {
                         }
                     }
                     
-                    Text("The series is a blend of classic television and the Marvel Cinematic Universe in which Wanda Maximoff and Vision—two super-powered beings living idealized suburban lives—begin to suspect that everything is not as it seems.")
+                    Text(viewmodel.characterModel.description)
                         .padding(.horizontal,12)
                         .setFont(fontName: .mainFont, size: 14)
                         .padding(.bottom,20)
                     
                     // 1. Comics
-                    SectionCompoents()
+                    if !viewmodel.characterModel.comics.items.isEmpty {
+                        SectionCompoents(title: "Comics",
+                                         data: viewmodel.characterModel.comics.items)
+                    }
+                    
                     
                     // 2. Series
-                    SectionCompoents()
+                    if !viewmodel.characterModel.series.items.isEmpty {
+                        SectionCompoents(title: "Series",
+                                         data: viewmodel.characterModel.series.items)
+                    }
                     
                     // 3. Stories
-                    SectionCompoents()
+                    if !viewmodel.characterModel.stories.items.isEmpty {
+                        SectionCompoents(title: "Stories",
+                                         data: viewmodel.characterModel.stories.items)
+                    }
                     
                     // 4. Events
-                    SectionCompoents()
+                    if !viewmodel.characterModel.events.items.isEmpty {
+                        SectionCompoents(title: "Events",
+                                         data: viewmodel.characterModel.events.items)
+                    }
 
                     Spacer()
                 }
@@ -92,5 +110,5 @@ struct CharacterDetailsView: View {
 }
 
 #Preview {
-    CharacterDetailsView(viewmodel: CharacterDetailsViewModel())
+    CharacterDetailsView(viewmodel: CharacterDetailsViewModel(characterModel: .mock))
 }

@@ -22,8 +22,8 @@ class CharactersCoordinator: BaseCoordinator {
         navigationController.setViewControllers([viewController], animated: true)
     }
     
-    func moveToCharacterDetails() {
-        let coordinator = CharacterDetailsCoordinator(navigationController: navigationController)
+    func moveToCharacterDetails(characterDetails: ResultModel) {
+        let coordinator = CharacterDetailsCoordinator(navigationController: navigationController, characterModel: characterDetails)
         add(coordinator: coordinator)
         coordinator.start()
     }

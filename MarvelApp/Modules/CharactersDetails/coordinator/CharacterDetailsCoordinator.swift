@@ -9,13 +9,15 @@ import UIKit
 
 class CharacterDetailsCoordinator: BaseCoordinator {
     let navigationController: UINavigationController
+    let characterModel: ResultModel
             
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController,characterModel: ResultModel) {
         self.navigationController = navigationController
+        self.characterModel = characterModel
     }
     
     override func start() {
-        let viewmodel = CharacterDetailsViewModel()
+        let viewmodel = CharacterDetailsViewModel(characterModel: characterModel)
         viewmodel.coordinator = self
         let viewController = CharacterDetailsViewController(viewmodel: viewmodel)
         viewController.viewmodel = viewmodel
