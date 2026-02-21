@@ -1,57 +1,56 @@
 # MarvelApp
 
-iOS app to browse Marvel characters with a paginated list and character details.
+MarvelApp is an iOS application for browsing Marvel characters, viewing character details, and navigating between list and detail experiences.
 
-## Task Reference
-This project was checked against `Mobile Task.docx` (provided by you on Feb 21, 2026).
+## Features
+- Characters list with pagination.
+- Character details screen with sections for comics, series, stories, and events.
+- Image loading and caching.
+- Coordinator-based navigation flow.
 
-## Branch Strategy
-- `main`: release branch (intended for App Store build, uses live Marvel API).
-- `Dev`: development branch (uses mock data for UI/demo/testing).
+## Architecture
+The project follows a layered, modular structure:
 
-## Run Project
-1. Open `MarvelApp.xcodeproj`.
+- `Domain Layer`
+  - Business entities (`CharacterEntity`).
+  - Repository contracts and implementations.
+  - Use cases (`GetCharactersUseCase`) to isolate business logic.
+
+- `Network Layer`
+  - Endpoint definitions and API clients.
+  - Base request/response handling.
+  - Marvel API integration.
+
+- `Modules`
+  - `CharactersScreen`: list UI + pagination logic.
+  - `CharactersDetails`: details UI and presentation logic.
+
+- `Coordinator`
+  - Centralized navigation between modules.
+
+## Branches
+- `main`
+  - Release-ready branch.
+  - Intended for production/App Store builds.
+  - Uses live Marvel API flow.
+
+- `Dev`
+  - Active development branch.
+  - Uses mock data mode for UI development and testing scenarios.
+
+## Branch Usage
+1. Use `Dev` for daily development, UI tuning, and feature iteration with mock data.
+2. Validate features against real API behavior before release.
+3. Merge stable, tested changes into `main` for release preparation.
+
+## Getting Started
+1. Open `MarvelApp.xcodeproj` in Xcode.
 2. Select the `MarvelApp` scheme.
-3. Run on simulator/device.
+3. Build and run on simulator or device.
 
-## API Keys (for `main`)
-Add Marvel keys in `Info.plist`:
+## API Configuration (main branch)
+Add the following keys to `Info.plist`:
 - `MARVEL_PUBLIC_KEY`
 - `MARVEL_PRIVATE_KEY`
 
-Without keys, remote fetch will fail.
-
-## Architecture
-- `Domain Layer`: entities, repositories, use cases.
-- `Network Layer`: API target/configuration/request handling.
-- `Modules`: `CharactersScreen`, `CharactersDetails`.
-- `Coordinator`: navigation flow.
-
-## Requirement Check (main vs Dev)
-Based on the task file requirements:
-
-1. Characters list loaded from Marvel API with pagination
-- `main`: Meets (remote API + pagination in list view model).
-- `Dev`: Uses mock data by design (not remote API), pagination behavior exists.
-
-2. Open character details on selection
-- `main`: Meets.
-- `Dev`: Meets.
-
-3. Hide sections with no data
-- `main`: Meets (section visibility checks in details view).
-- `Dev`: Meets.
-
-4. Comics/series/stories/events images from `resourceURI` with lazy loading
-- `main`: Not fully meeting requirement.
-- `Dev`: Not fully meeting requirement.
-- Current implementation loads `item.resourceURI` directly as an image URL, but task expects fetching resource details and then lazy-loading the returned thumbnail(s).
-
-5. Replicate mockup quality + appropriate transitions
-- `main`: Partially meets (basic transitions/UX exist).
-- `Dev`: Partially meets.
-
-## Branch Usage Instruction
-- Work on features/integration in `Dev` (mock mode enabled).
-- Merge stabilized, API-ready code into `main` for release/store builds.
-- Before release from `main`, complete missing requirement #4 (resourceURI detail fetch + lazy image loading).
+Without these keys, remote API requests will fail.
